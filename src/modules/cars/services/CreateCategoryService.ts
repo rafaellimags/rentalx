@@ -9,6 +9,8 @@ interface IRequest {
 
 class CreateCategoryService {
   // Dependency inversion.
+  // ICategoriesRepository interface is used for maintainability purposes.
+  // Is possible to change objects of the same type in case of further changes
   constructor(private categoriesRepository: ICategoriesRepository) {}
 
   execute({ name, description }: IRequest): void {
