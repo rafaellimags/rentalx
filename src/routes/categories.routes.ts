@@ -1,19 +1,29 @@
 import { Router } from "express";
 
-const categoriesRoutes = Router();
+import { Category } from "../model/Category";
+import { CategoriesRepository } from "../repositories/CategoriesRepository";
+import { CreateCategoryService } from "../services/CreateCategoryService";
+// import { PostgresCategoriesRepository } from "../repositories/PostgresCategoryRepository";
 
-const categories = [];
+const categoriesRoutes: Router = Router();
+const categoriesRepository: CategoriesRepository = new CategoriesRepository();
+// const categoriesRepository: PostgresCategoriesRepository = new PostgresCategoriesRepository();
 
-categoriesRoutes.post("/categories", (request, response) => {
-    const { name, description } = request.body;
+// Relative path after base path defined in server.
+categoriesRoutes.post("/", (request, response) => {
+  const { name, description } = request.body;
+  // Pass an instance of CategoriesRepository so the service can use its methods to run CRUD operations,
+  // removing this reponsibility from the route.
+  const createCategoryService: CreateCategoryService = new CreateCategoryService(categoriesRepository);
 
-    categories.push({
-        name,
-        description
-    })
+  createCategoryService.execute({ name, description });
 
-    return response.status(201).send();
-})
+  return response.status(201).send();
+});
 
-export { categoriesRoutes }
+categoriesRoutes.get("/", (request, response) => {
+  const categoriesList: Category[] = categoriesRepository.list();
+  return response.json(categoriesList).status(200);
+});
 
+export { categoriesRoutes };

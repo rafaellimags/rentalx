@@ -77,9 +77,10 @@
         ]
       }
     ],
-    "prettier/prettier": "error",
+    "prettier/prettier": [
+      "error"
+    ],
     "@typescript-eslint/explicit-function-return-type": "error",
-    
     "@typescript-eslint/typedef": [
       "error",
       {

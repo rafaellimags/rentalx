@@ -1,11 +1,12 @@
-import express from 'express';
-import { categoriesRoutes } from './routes/categories.routes';
+import express from "express";
 
-const app = express();
+import { categoriesRoutes } from "./routes/categories.routes";
 
-app.use(express.json())
+const app: express.Application = express();
 
-app.use(categoriesRoutes);
+app.use(express.json());
 
-app.listen(3333, () => console.log('Server is running.'))
+// base path for cateroies routes
+app.use("/categories", categoriesRoutes);
 
+app.listen(3333, () => console.log("Server is running."));
