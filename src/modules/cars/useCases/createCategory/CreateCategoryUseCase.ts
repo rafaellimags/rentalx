@@ -1,13 +1,13 @@
-import { Category } from "../model/Category";
+import { Category } from "../../model/Category";
 // import { CategoriesRepository } from "../repositories/CategoriesRepository";
-import { ICategoriesRepository } from "../repositories/ICategoriesRepository";
+import { ICategoriesRepository } from "../../repositories/ICategoriesRepository";
 
 interface IRequest {
   name: string;
   description: string;
 }
 
-class CreateCategoryService {
+class CreateCategoryUseCase {
   // Dependency inversion.
   // ICategoriesRepository interface is used for maintainability purposes.
   // Is possible to change objects of the same type in case of further changes
@@ -24,4 +24,4 @@ class CreateCategoryService {
   }
 }
 
-export { CreateCategoryService };
+export { CreateCategoryUseCase };
