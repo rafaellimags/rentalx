@@ -1,5 +1,8 @@
 import { Specification } from "../../model/Specification";
-import { ISpecificationRepository } from "../../repositories/ISpecificationsRepository";
+import {
+  ICreateSpecificationDTO,
+  ISpecificationRepository,
+} from "../../repositories/ISpecificationsRepository";
 
 interface IRequest {
   name: string;
@@ -16,7 +19,10 @@ class CreateSpecificationUseCase {
       throw new Error("Specification already exists");
     }
 
-    this.specificationRepository.create({ name, description });
+    // Create a DTO from request data
+    const specificationDTO: ICreateSpecificationDTO = { name, description };
+
+    this.specificationRepository.create(specificationDTO);
   }
 }
 
